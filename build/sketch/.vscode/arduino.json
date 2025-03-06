@@ -1,0 +1,8 @@
+#line 1 "/Users/nik/_dev/2-arduino/TrainController/.vscode/arduino.json"
+{
+    "port": "/dev/tty.usbmodem101",
+    "board": "arduino:avr:mega",
+    "configuration": "cpu=atmega2560",
+    "sketch": "TrainController.ino",
+    "output": "./build"
+}
