@@ -1,4 +1,3 @@
-#line 1 "/Users/nik/_dev/2-arduino/TrainController/util_MotorDriver.h"
 /*
  * Motor class for controlling a motor with PWM and direction pins.
  * Supports setting speed, direction, and stopping.
@@ -13,7 +12,6 @@ class MotorDriver {
     String motorName;    // Name of the motor
     String currentDirection; // Current motor direction
     float currentSpeed;  // Current motor speed percentage
-    String initMessage;  // Stores initialization message
 
     void logChange(String parameter, String value) {
       Serial.println(motorName + " changed " + parameter + " to " + value);
@@ -66,7 +64,6 @@ class MotorDriver {
       this->outDirection2 = outDirection2;
       this->currentDirection = "stopped";
       this->currentSpeed = 0;
-      this->initMessage = "Initialized " + motorName + " with PWM pin " + String(outPwm) + ", Direction pin(s): " + String(outDirection1) + (dualDirection ? (", " + String(outDirection2)) : "");
 
       pinMode(outPwm, OUTPUT);
       pinMode(outDirection1, OUTPUT);
@@ -74,13 +71,6 @@ class MotorDriver {
       if (dualDirection) {
         pinMode(outDirection2, OUTPUT);
       }
-    }
-
-    /**
-     * Initializes the motor driver.
-     */
-    void begin() {
-      Serial.println(initMessage);
     }
 
     /**

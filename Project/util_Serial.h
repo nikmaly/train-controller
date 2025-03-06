@@ -1,4 +1,3 @@
-#line 1 "/Users/nik/_dev/2-arduino/TrainController/util_Serial.h"
 /**
  * @typedef {Object} SerialCommand
  * @property {String} target - The target of the command (e.g., "motor").
@@ -9,23 +8,15 @@ struct SerialCommand {
   String target;
   String action;
   String value;
+
+  bool isValid() {
+    return target.length() > 0 && action.length() > 0;
+  }
 };
 
 class SerialHandler {
-  String initMessage;  // Stores initialization message
 
   public:
-    SerialHandler() {
-      this->initMessage = "Initialized serial";
-    }
-
-    /**
-     * Initializes the serial communication.
-     */
-    void begin() {
-      Serial.begin(9600);
-      Serial.println(initMessage);
-    }
 
     /**
      * Reads a command from the serial input.

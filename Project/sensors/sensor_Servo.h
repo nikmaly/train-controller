@@ -25,7 +25,7 @@ class ServoController {
      */
     void begin() {
       servo.attach(pin);
-      Serial.println("Initialized servo " + servoName + " on pin " + String(pin));
+
     }
 
     /**

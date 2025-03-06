@@ -1,7 +1,7 @@
 {
-    "port": "/dev/tty.usbmodem101",
+    "port": "/dev/tty.usbmodem1101",
     "board": "arduino:avr:mega",
     "configuration": "cpu=atmega2560",
-    "sketch": "TrainController.ino",
-    "output": "./build"
+    "sketch": "Project/Project.ino",
+    "sourceDir": "./src"
 }
