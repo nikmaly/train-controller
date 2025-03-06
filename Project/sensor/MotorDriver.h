@@ -1,3 +1,6 @@
+#ifndef UTIL_MOTORDRIVER_H
+#define UTIL_MOTORDRIVER_H
+
 /*
  * Motor class for controlling a motor with PWM and direction pins.
  * Supports setting speed, direction, and stopping.
@@ -115,3 +118,5 @@ class MotorDriver {
       return motorName;
     }
 };
+
+#endif // UTIL_MOTORDRIVER_H

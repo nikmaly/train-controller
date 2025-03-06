@@ -1,3 +1,6 @@
+#ifndef UTIL_SERIAL_H
+#define UTIL_SERIAL_H
+
 /**
  * @typedef {Object} SerialCommand
  * @property {String} target - The target of the command (e.g., "motor").
@@ -70,3 +73,5 @@ class SerialHandler {
       return command;
     }
 };
+
+#endif // UTIL_SERIAL_H

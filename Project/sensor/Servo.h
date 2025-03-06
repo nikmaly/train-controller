@@ -1,3 +1,6 @@
+#ifndef SENSOR_SERVO_H
+#define SENSOR_SERVO_H
+
 #include <Servo.h>
 
 /**
@@ -25,7 +28,6 @@ class ServoController {
      */
     void begin() {
       servo.attach(pin);
-
     }
 
     /**
@@ -45,3 +47,5 @@ class ServoController {
       return servoName;
     }
 };
+
+#endif // SENSOR_SERVO_H

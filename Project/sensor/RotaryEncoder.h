@@ -1,3 +1,6 @@
+#ifndef UTIL_ROTARYENCODER_H
+#define UTIL_ROTARYENCODER_H
+
 /**
  * @typedef {Object} EncoderCommand
  * @property {String} target - The target of the command (e.g., "motor").
@@ -93,3 +96,5 @@ class RotaryEncoder {
       return command;
     }
 };
+
+#endif // UTIL_ROTARYENCODER_H
