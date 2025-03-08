@@ -1,11 +1,50 @@
 {
-    "arduino.useArduinoCli": true,
-    "arduino.logLevel": "info",
-    "arduino.enableUSBDetection": true,
-    "arduino.disableTestingOpen": false,
-    "arduino.skipHeaderProvider": false,
-    "arduino.additionalUrls": [
-        "https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json",
-        "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
-    ],
+  "arduino.useArduinoCli": true,
+  "arduino.logLevel": "info",
+  "arduino.enableUSBDetection": true,
+  "arduino.disableTestingOpen": false,
+  "arduino.skipHeaderProvider": false,
+  "arduino.additionalUrls": [
+      "https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json",
+      "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
+  ],
+
+  // C/C++ linting settings with updated formatting rules
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 100, PointerAlignment: Left, SeparateDefinitionBlocks: Always, MaxEmptyLinesToKeep: 1 }",
+  "C_Cpp.default.cppStandard": "c++11", // Common standard for Arduino
+  "C_Cpp.default.cStandard": "c11",
+  "C_Cpp.default.intelliSenseMode": "gcc-x64", // Set appropriately for your platform
+  "C_Cpp.intelliSenseEngine": "default",
+  "C_Cpp.errorSquiggles": "enabled",
+  
+  // Editor settings for consistent code style
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.rulers": [100],
+  
+  // Automatic semicolon insertion using "Auto Add Semicolons" extension
+  "auto-add-semicolon.enable": true,
+  "auto-add-semicolon.insertSpaceBeforeSemicolon": false,
+  "auto-add-semicolon.languageIds": [
+    "c",
+    "cpp",
+    "arduino"
+  ],
+  
+  // File associations
+  "files.associations": {
+    "*.ino": "arduino",
+    "*.h": "cpp",
+    "*.cpp": "cpp"
+  },
+  
+  // Include common Arduino libraries in intellisense
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}/**",
+    "${env:USERPROFILE}/Documents/Arduino/libraries/**", // Windows path
+    "${env:HOME}/Documents/Arduino/libraries/**" // Linux/Mac path
+  ]
 }

@@ -33,4 +33,5 @@ This project is an Arduino-based train controller system. It manages multiple co
   - As an addendum to responses, note any recommendations or improvements.
   - Prioritise best practice and clarity of code.
   - Ensure code is linted and formatted clearly and consistently.
+  - Respect the `.clang-format` rules
 
