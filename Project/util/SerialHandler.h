@@ -1,5 +1,5 @@
-#ifndef UTIL_SERIAL_H
-#define UTIL_SERIAL_H
+#ifndef SERIAL_H
+#define SERIAL_H
 
 /**
  * @typedef {Object} SerialCommand
@@ -75,4 +75,4 @@ class SerialHandler {
   }
 };
 
-#endif  // UTIL_SERIAL_H
+#endif  // SERIAL_H

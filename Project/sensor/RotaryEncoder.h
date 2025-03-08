@@ -1,5 +1,5 @@
-#ifndef UTIL_ROTARYENCODER_H
-#define UTIL_ROTARYENCODER_H
+#ifndef ROTARYENCODER_H
+#define ROTARYENCODER_H
 
 /**
  * @typedef {Object} EncoderCommand
@@ -107,4 +107,4 @@ class RotaryEncoder {
   }
 };
 
-#endif  // UTIL_ROTARYENCODER_H
+#endif  // ROTARYENCODER_H

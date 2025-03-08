@@ -1,3 +1,6 @@
+#ifndef HALLSENSOR_H
+#define HALLSENSOR_H
+
 /**
  * @class HallSensor
  * @brief A class to handle the Hall effect sensor.
@@ -25,3 +28,5 @@ class HallSensor {
         return digitalRead(sensorPin);
     }
 };
+
+#endif  // HALLSENSOR_H

@@ -6,6 +6,10 @@
 #include "sensor/RotaryEncoder.h"
 #include "sensor/HallSensor.h"
 #include "sensor/Servo.h"
+#include "program/Signal.h"
+#include "program/LineManager.h"
+#include "program/RailwayManager.h"
+#include "program/Turnout.h"
 
 MotorDriver trackLineA(2, 3, "Track A");
 MotorDriver trackLineB(4, 5, "Track B");
@@ -55,6 +59,43 @@ const int switchCount = sizeof(switches) / sizeof(switches[0]);
 
 CommandHandler commandHandler(activeTrackLine, servoMap, servoMapSize, switches, switchCount, tracks, trackCount);
 
+// Create Signal objects for OuterLine
+Signal lineASignals[] = {
+  Signal("Signal1", 22, 28, 34),
+  Signal("Signal2", 23, 29, 35),
+  Signal("Signal3", 24, 30, 36)
+};
+
+// Create Signal objects for InnerLine
+Signal lineBSignals[] = {
+  Signal("Signal4", 25, 31, 37),
+  Signal("Signal5", 26, 32, 38),
+  Signal("Signal6", 27, 33, 39)
+};
+
+// Create Turnout objects for OuterLine
+Turnout lineATurnouts[] = {
+  Turnout("Turnout1", &servo1, 90, 0)
+  // Add more turnouts as needed
+};
+
+// Create Turnout objects for InnerLine
+Turnout lineBTurnouts[] = {
+  Turnout("Turnout2", &servo1, 90, 0)
+  // Add more turnouts as needed
+};
+
+// Create LineManager objects
+LineManager lineManagers[] = {
+  LineManager("OuterLine", lineASignals, sizeof(lineASignals) / sizeof(lineASignals[0]), lineATurnouts, sizeof(lineATurnouts) / sizeof(lineATurnouts[0])),
+  LineManager("InnerLine", lineBSignals, sizeof(lineBSignals) / sizeof(lineBSignals[0]), lineBTurnouts, sizeof(lineBTurnouts) / sizeof(lineBTurnouts[0]))
+};
+
+const int lineManagerCount = sizeof(lineManagers) / sizeof(lineManagers[0]);
+
+// Create RailwayManager object
+RailwayManager railwayManager(lineManagers, lineManagerCount);
+
 /**
  * Initializes the setup.
  */
@@ -77,12 +118,20 @@ void setup() {
  * Main loop to handle commands and updates.
  */
 void loop() {
+  // Run the track update logic
+  // TODO: Implement track update logic
+
+  // Update the railway manager
+  railwayManager.update();
+
+  // Read the serial input
   SerialCommand serialCommand = serialHandler.readCommand();
   if (serialCommand.isValid()) {
     Serial.println("Received serial command: " + serialCommand.target + " " + serialCommand.action + " " + serialCommand.value);
     commandHandler.handleCommand(serialCommand.target, serialCommand.action, serialCommand.value);
   }
 
+  // Read the speed encoder
   EncoderCommand encoderCommand = speedEncoder.update();
   if (encoderCommand.isValid()) {
     Serial.println("Received encoder command: " + encoderCommand.target + " " + encoderCommand.action + " " + encoderCommand.value);

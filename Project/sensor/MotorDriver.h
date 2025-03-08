@@ -1,5 +1,5 @@
-#ifndef UTIL_MOTORDRIVER_H
-#define UTIL_MOTORDRIVER_H
+#ifndef MOTORDRIVER_H
+#define MOTORDRIVER_H
 
 /*
  * Motor class for controlling a motor with PWM and direction pins.
@@ -132,4 +132,4 @@ class MotorDriver {
   }
 };
 
-#endif  // UTIL_MOTORDRIVER_H
+#endif  // MOTORDRIVER_H
