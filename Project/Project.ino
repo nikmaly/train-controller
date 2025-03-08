@@ -118,9 +118,6 @@ void setup() {
  * Main loop to handle commands and updates.
  */
 void loop() {
-  // Run the track update logic
-  // TODO: Implement track update logic
-
   // Update the railway manager
   railwayManager.update();
 
@@ -136,6 +133,16 @@ void loop() {
   if (encoderCommand.isValid()) {
     Serial.println("Received encoder command: " + encoderCommand.target + " " + encoderCommand.action + " " + encoderCommand.value);
     commandHandler.handleCommand(encoderCommand.target, encoderCommand.action, encoderCommand.value);
+  }
+
+  // Handle track swap request
+  if (encoderCommand.trackSwapRequested) {
+    if (activeTrackLine == &trackLineA) {
+      activeTrackLine = &trackLineB;
+    } else {
+      activeTrackLine = &trackLineA;
+    }
+    Serial.println("Track swap requested. Active track line switched.");
   }
 
   delay(1);
