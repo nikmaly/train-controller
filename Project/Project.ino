@@ -10,6 +10,7 @@
 #include "program/LineManager.h"
 #include "program/RailwayManager.h"
 #include "program/Turnout.h"
+#include "program/SpeedController.h"
 
 MotorDriver trackLineA(2, 3, "Track A");
 MotorDriver trackLineB(4, 5, "Track B");
@@ -21,7 +22,8 @@ ServoController servo1(9, "Servo1");
 // ServoController servo4(17, "Servo4");
 // ServoController servo5(18, "Servo5");
 // ServoController servo6(19, "Servo6");
-RotaryEncoder speedEncoder(7, 6, 5, &trackLineA, &trackLineB);
+RotaryEncoder speedEncoder(7, 6, 5);
+SpeedController speedController(&speedEncoder, &trackLineA, &trackLineB);
 HallSensor hallSensor(13, true);
 SerialHandler serialHandler;
 MotorDriver* activeTrackLine = &trackLineA;
@@ -128,8 +130,8 @@ void loop() {
     commandHandler.handleCommand(serialCommand.target, serialCommand.action, serialCommand.value);
   }
 
-  // Read the speed encoder
-  EncoderCommand encoderCommand = speedEncoder.update();
+  // Read the speed controller
+  EncoderCommand encoderCommand = speedController.update();
   if (encoderCommand.isValid()) {
     Serial.println("Received encoder command: " + encoderCommand.target + " " + encoderCommand.action + " " + encoderCommand.value);
     commandHandler.handleCommand(encoderCommand.target, encoderCommand.action, encoderCommand.value);
@@ -137,11 +139,8 @@ void loop() {
 
   // Handle track swap request
   if (encoderCommand.trackSwapRequested) {
-    if (activeTrackLine == &trackLineA) {
-      activeTrackLine = &trackLineB;
-    } else {
-      activeTrackLine = &trackLineA;
-    }
+    speedController.swapTrack();
+    activeTrackLine = speedController.getActiveTrackLine();
     Serial.println("Track swap requested. Active track line switched.");
   }
 
