@@ -11,6 +11,7 @@
 #include "program/RailwayManager.h"
 #include "program/Turnout.h"
 #include "program/SpeedController.h"
+#include "program/SceneryLighting.h"
 
 MotorDriver trackLineA(2, 3, "Track A");
 MotorDriver trackLineB(4, 5, "Track B");
@@ -97,6 +98,17 @@ const int lineManagerCount = sizeof(lineManagers) / sizeof(lineManagers[0]);
 
 // Create RailwayManager object
 RailwayManager railwayManager(lineManagers, lineManagerCount);
+
+// Define lighting items
+const int lightingPins1[] = {40, 41, 42};
+SceneryLighting lighting1("Lighting1", lightingPins1, sizeof(lightingPins1) / sizeof(lightingPins1[0]));
+
+SceneryLighting sceneries[] = {
+  lighting1
+  // Add more scenery lighting objects as needed
+};
+
+const int sceneryCount = sizeof(sceneries) / sizeof(sceneries[0]);
 
 /**
  * Initializes the setup.
