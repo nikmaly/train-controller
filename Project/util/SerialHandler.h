@@ -13,11 +13,19 @@ struct SerialCommand {
   String action;
   String value;
 
+  /**
+   * Checks if the command is valid.
+   * @returns {bool} True if the command is valid, false otherwise.
+   */
   bool isValid() {
     return target.length() > 0 && action.length() > 0;
   }
 };
 
+/**
+ * @class SerialHandler
+ * @description Handles serial communication and parses commands.
+ */
 class SerialHandler {
  public:
   /**

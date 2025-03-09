@@ -48,7 +48,7 @@ class SpeedController {
       command.target = "motor";
       command.action = "switch";
 
-      delay(500);  // Debounce delay
+      delay(500);
     }
 
     return command;

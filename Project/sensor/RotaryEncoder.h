@@ -29,6 +29,12 @@ class RotaryEncoder {
   }
 
  public:
+  /**
+   * Constructor for RotaryEncoder.
+   * @param {int} pinCLK - The pin for the CLK signal.
+   * @param {int} pinDT - The pin for the DT signal.
+   * @param {int} pinSwitch - The pin for the switch.
+   */
   RotaryEncoder(int pinCLK, int pinDT, int pinSwitch)
       : pinCLK(pinCLK), pinDT(pinDT), pinSwitch(pinSwitch) {
     pinMode(pinCLK, INPUT);
@@ -38,10 +44,18 @@ class RotaryEncoder {
     attachInterrupt(digitalPinToInterrupt(pinCLK), handleInterruptCLK, CHANGE);
   }
 
+  /**
+   * Gets the current count.
+   * @returns {int} The current count.
+   */
   int getCount() const {
     return count;
   }
 
+  /**
+   * Checks if the button is pressed.
+   * @returns {bool} True if the button is pressed, false otherwise.
+   */
   bool isButtonPressed() const {
     return digitalRead(pinSwitch) == LOW;
   }

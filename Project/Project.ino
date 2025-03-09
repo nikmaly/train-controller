@@ -16,13 +16,8 @@
 MotorDriver trackLineA(2, 3, "Track A");
 MotorDriver trackLineB(4, 5, "Track B");
 // MotorDriver trackLineC(10, 11, "Track C");
-// MotorDriver trackLineD(12, 13, "Track D");
 ServoController servo1(9, "Servo1");
 // ServoController servo2(15, "Servo2");
-// ServoController servo3(16, "Servo3");
-// ServoController servo4(17, "Servo4");
-// ServoController servo5(18, "Servo5");
-// ServoController servo6(19, "Servo6");
 RotaryEncoder speedEncoder(7, 6, 5);
 SpeedController speedController(&speedEncoder, &trackLineA, &trackLineB);
 HallSensor hallSensor(13, true);
@@ -33,29 +28,20 @@ Track tracks[] = {
   {"Track A", &trackLineA},
   {"Track B", &trackLineB},
   // {"Track C", &trackLineC},
-  // {"Track D", &trackLineD}
 };
 
 const int trackCount = sizeof(tracks) / sizeof(tracks[0]);
 
 ServoMapping servoMap[] = {
   {"Servo1", &servo1},
-  // {"Servo2", &servo2},
-  // {"Servo3", &servo3},
-  // {"Servo4", &servo4},
-  // {"Servo5", &servo5},
-  // {"Servo6", &servo6}
+  // {"Servo2", &servo2}
 };
 
 const int servoMapSize = sizeof(servoMap) / sizeof(servoMap[0]);
 
 Switch switches[] = {
   {"Switch1", false, 90, 0, &servo1},
-  // {"Switch2", false, 90, 0, &servo2},
-  // {"Switch3", false, 90, 0, &servo3},
-  // {"Switch4", false, 90, 0, &servo4},
-  // {"Switch5", false, 90, 0, &servo5},
-  // {"Switch6", false, 90, 0, &servo6}
+  // {"Switch2", false, 90, 0, &servo2}
 };
 
 const int switchCount = sizeof(switches) / sizeof(switches[0]);
@@ -79,13 +65,11 @@ Signal lineBSignals[] = {
 // Create Turnout objects for OuterLine
 Turnout lineATurnouts[] = {
   Turnout("Turnout1", &servo1, 90, 0)
-  // Add more turnouts as needed
 };
 
 // Create Turnout objects for InnerLine
 Turnout lineBTurnouts[] = {
   Turnout("Turnout2", &servo1, 90, 0)
-  // Add more turnouts as needed
 };
 
 // Create LineManager objects
@@ -105,7 +89,6 @@ SceneryLighting lighting1("Lighting1", lightingPins1, sizeof(lightingPins1) / si
 
 SceneryLighting sceneries[] = {
   lighting1
-  // Add more scenery lighting objects as needed
 };
 
 const int sceneryCount = sizeof(sceneries) / sizeof(sceneries[0]);
@@ -116,7 +99,7 @@ const int sceneryCount = sizeof(sceneries) / sizeof(sceneries[0]);
 void setup() {
   Serial.begin(115200);
   while (!Serial) {
-    ; // Wait for serial port to connect. Needed for native USB port only
+    ;
   }
   delay(100);
   servo1.begin();

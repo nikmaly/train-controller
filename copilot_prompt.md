@@ -31,7 +31,6 @@ This project is an Arduino-based train controller system. It manages multiple co
 - **loop()**: Main loop to handle commands and updates.
 
 ## Developer Information
-- **Experience**: Experienced developer, but only occasionally works on Arduino projects.
 - **Response Preferences**:
   - NEVER modify existing pin values without specifically being asked to do so. 
   - If there is no available pin, or it is not of the appropriate type, warn me

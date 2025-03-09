@@ -38,6 +38,16 @@ class CommandHandler {
   int trackCount;
 
  public:
+  /**
+   * Constructor for CommandHandler.
+   * @param {MotorDriver*} activeTrackLine - The active track line motor driver.
+   * @param {ServoMapping*} servoMap - The map of servo controllers.
+   * @param {int} servoMapSize - The size of the servo map.
+   * @param {Switch*} switches - The array of switches.
+   * @param {int} switchCount - The number of switches.
+   * @param {Track*} tracks - The array of tracks.
+   * @param {int} trackCount - The number of tracks.
+   */
   CommandHandler(MotorDriver* activeTrackLine, ServoMapping* servoMap, int servoMapSize,
                  Switch* switches, int switchCount, Track* tracks, int trackCount)
       : activeTrackLine(activeTrackLine),
@@ -49,6 +59,12 @@ class CommandHandler {
         trackCount(trackCount) {
   }
 
+  /**
+   * Handles a command.
+   * @param {String} target - The target of the command.
+   * @param {String} action - The action to be performed.
+   * @param {String} value - The value associated with the action.
+   */
   void handleCommand(const String& target, const String& action, const String& value) {
     if (target == "motor") {
       if (action == "stop") {
