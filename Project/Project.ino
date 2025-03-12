@@ -13,35 +13,115 @@
 #include "program/SpeedController.h"
 #include "program/SceneryLighting.h"
 
-MotorDriver trackLineA(2, 3, "Track A");
-MotorDriver trackLineB(4, 5, "Track B");
-// MotorDriver trackLineC(10, 11, "Track C");
-ServoController servo1(9, "Servo1");
-// ServoController servo2(15, "Servo2");
-RotaryEncoder speedEncoder(7, 6, 5);
-SpeedController speedController(&speedEncoder, &trackLineA, &trackLineB);
-HallSensor hallSensor(13, true);
+// Analog Pins (A0-A15)
+#define HALL_SENSOR_A_A0          A0   // Analog: Hall effect sensor A
+#define HALL_SENSOR_B_A1          A1   // Analog: Hall effect sensor B
+#define HALL_SENSOR_C_A2          A2   // Analog: Hall effect sensor C
+#define HALL_SENSOR_D_A3          A3   // Analog: Hall effect sensor D
+#define HALL_SENSOR_E_A4          A4   // Analog: Hall effect sensor E
+#define HALL_SENSOR_F_A5          A5   // Analog: Hall effect sensor F
+#define UNUSUSED_ANALOG_A6        A6   // Analog: Unused pin
+#define UNUSUSED_ANALOG_A7        A7   // Analog: Unused pin
+#define UNUSUSED_ANALOG_A8        A8   // Analog: Unused pin
+#define UNUSUSED_ANALOG_A9        A9   // Analog: Unused pin
+#define UNUSUSED_ANALOG_A10       A10  // Analog: Unused pin
+#define UNUSUSED_ANALOG_A11       A11  // Analog: Unused pin
+#define UNUSUSED_ANALOG_A12       A12  // Analog: Unused pin
+#define UNUSUSED_ANALOG_A13       A13  // Analog: Unused pin
+#define UNUSUSED_ANALOG_A14       A14  // Analog: Unused pin
+#define UNUSUSED_ANALOG_A15       A15  // Analog: Unused pin
+
+// Hardware Serial USB Communication Pins
+#define SERIAL_RX_USB_PIN         0    // Serial Input: RX USB
+#define SERIAL_TX_USB_PIN         1    // Serial Output: TX0 USB
+
+// Digital PWM Pins
+#define TRACK_A_PIN1              2    // Digital PWM: Track A Motor Driver Pin 1
+#define TRACK_A_PIN2              3    // Digital PWM: Track A Motor Driver Pin 2
+#define TRACK_B_PIN1              4    // Digital PWM: Track B Motor Driver Pin 1
+#define TRACK_B_PIN2              5    // Digital PWM: Track B Motor Driver Pin 2
+#define UNUSED_PWM_6              6    // Digital PWM: Unused pin
+#define UNUSED_PWM_7              7    // Digital PWM: Unused pin
+#define UNUSED_PWM_8              8    // Digital PWM: Unused pin
+#define SERVO_A_9                 9    // Digital PWM: Servo1 (Turnout1) control pin
+#define SERVO_B_10                10   // Digital PWM: Servo2 (Turnout2) control pin
+#define UNUSED_PWM_11             11   // Digital PWM: Unused pin
+#define UNUSED_PWM_12             12   // Digital PWM: Unused pin
+#define UNUSED_PWM_13             13   // Digital PWM: Unused pin
+
+// Hardware Serial Communication Pins
+#define SERIAL3_TX_PIN            14  // Serial Output: TX3
+#define SERIAL3_RX_PIN            15  // Serial Input: RX3
+#define SERIAL2_TX_PIN            16  // Serial Output: TX2
+#define SERIAL2_RX_PIN            17  // Serial Input: RX2
+
+// Digital Pins
+#define SPEED_ENCODER_A_PIN_A_18  18 // Digital Input: Speed Encoder A pin A (Interrupt capable)
+#define SPEED_ENCODER_A_PIN_B_19  19 // Digital Input: Speed Encoder A pin B (Interrupt capable)
+#define SPEED_ENCODER_B_PIN_A_20  20 // Digital Input: Speed Encoder B pin A (Interrupt capable)
+#define SPEED_ENCODER_B_PIN_B_21  21 // Digital Input: Speed Encoder B pin B (Interrupt capable)
+#define SPEED_ENCODER_A_SWITCH_22 22 // Digital Input: Speed Encoder A Switch
+#define SPEED_ENCODER_B_SWITCH_23 23 // Digital Input: Speed Encoder B Switch
+#define UNUSED_DIGITAL_24         24 // Digital Input: Unused pin
+#define UNUSED_DIGITAL_25         25 // Digital Input: Unused pin
+#define UNUSED_DIGITAL_26         26  // Digital Input: Unused pin
+#define UNUSED_DIGITAL_27         27  // Digital Input: Unused pin
+#define UNUSED_DIGITAL_28         28  // Digital Input: Unused pin
+#define UNUSED_DIGITAL_29         29  // Digital Input: Unused pin
+#define SIGNAL_1_GREEN_PIN_30     30  // Digital Input: Signal 1 Green LED
+#define SIGNAL_1_RED_PIN_31       31  // Digital Input: Signal 1 Red LED
+#define SIGNAL_2_GREEN_PIN_32     32  // Digital Input: Signal 2 Green LED
+#define SIGNAL_2_RED_PIN_33       33  // Digital Input: Signal 2 Red LED
+#define SIGNAL_3_GREEN_PIN_34     34  // Digital Input: Signal 3 Green LED
+#define SIGNAL_3_RED_PIN_35       35  // Digital Input: Signal 3 Red LED
+#define SIGNAL_4_GREEN_PIN_36     36  // Digital Input: Signal 4 Green LED
+#define SIGNAL_4_RED_PIN_37       37  // Digital Input: Signal 4 Red LED
+#define SIGNAL_5_GREEN_PIN_38     38  // Digital Input: Signal 5 Green LED
+#define SIGNAL_5_RED_PIN_39       39  // Digital Input: Signal 5 Red LED
+#define SIGNAL_6_GREEN_PIN_40     40  // Digital Input: Signal 6 Green LED
+#define SIGNAL_6_RED_PIN_41       41  // Digital Input: Signal 6 Red LED
+#define UNUSED_DIGITAL_42         42  // Digital Input: Unused pin
+#define UNUSED_DIGITAL_43         43  // Digital Input: Unused pin
+#define UNUSED_DIGITAL_44         44  // Digital Input: Unused pin
+#define LIGHTING_FACTORY_A_45     45  // Digital Input: Lighting Factory A
+#define LIGHTING_HOUSE_A_46       46  // Digital Input: Lighting House A
+#define LIGHTING_HOUSE_B_47       47  // Digital Input: Lighting House B
+#define LIGHTING_ROAD_A_48        48  // Digital Input: Lighting Road A
+#define UNUSED_DIGITAL_49         49  // Digital Input: Unused pin
+
+// Other
+#define SPI_MISO_PIN_50           50  // SPI Input: MISO
+#define SPI_MOSI_PIN_51           51  // SPI Output: MOSI
+#define SPI_SCK_PIN_52            52  // SPI Output: SCK
+#define SPI_SS_PIN_53             53  // SPI Output: SS
+
+MotorDriver trackLineA(TRACK_A_PIN1, TRACK_A_PIN2, "Track A");
+MotorDriver trackLineB(TRACK_B_PIN1, TRACK_B_PIN2, "Track B");
+ServoController servo1(SERVO_A_9, "Servo1");
+ServoController servo2(SERVO_B_10, "Servo2");
 SerialHandler serialHandler;
 MotorDriver* activeTrackLine = &trackLineA;
+RotaryEncoder speedEncoder(SPEED_ENCODER_A_PIN_A_18, SPEED_ENCODER_A_PIN_B_19, SPEED_ENCODER_A_SWITCH_22);
+RotaryEncoder speedEncoderB(SPEED_ENCODER_B_PIN_A_20, SPEED_ENCODER_B_PIN_B_21, SPEED_ENCODER_B_SWITCH_23);
+SpeedController speedController(&speedEncoder, &trackLineA, &trackLineB);
 
 Track tracks[] = {
   {"Track A", &trackLineA},
   {"Track B", &trackLineB},
-  // {"Track C", &trackLineC},
 };
 
 const int trackCount = sizeof(tracks) / sizeof(tracks[0]);
 
 ServoMapping servoMap[] = {
   {"Servo1", &servo1},
-  // {"Servo2", &servo2}
+  {"Servo2", &servo2}
 };
 
 const int servoMapSize = sizeof(servoMap) / sizeof(servoMap[0]);
 
 Switch switches[] = {
   {"Switch1", false, 90, 0, &servo1},
-  // {"Switch2", false, 90, 0, &servo2}
+  {"Switch2", false, 90, 0, &servo2}
 };
 
 const int switchCount = sizeof(switches) / sizeof(switches[0]);
@@ -50,16 +130,16 @@ CommandHandler commandHandler(activeTrackLine, servoMap, servoMapSize, switches,
 
 // Create Signal objects for OuterLine
 Signal lineASignals[] = {
-  Signal("Signal1", 22, 28, 34),
-  Signal("Signal2", 23, 29, 35),
-  Signal("Signal3", 24, 30, 36)
+  Signal("Signal1", HALL_SENSOR_A_A0, SIGNAL_1_GREEN_PIN_30, SIGNAL_1_RED_PIN_31),
+  Signal("Signal2", HALL_SENSOR_B_A1, SIGNAL_2_GREEN_PIN_32, SIGNAL_1_RED_PIN_31),
+  Signal("Signal3", HALL_SENSOR_C_A2, SIGNAL_3_GREEN_PIN_34, SIGNAL_1_RED_PIN_31)
 };
 
 // Create Signal objects for InnerLine
 Signal lineBSignals[] = {
-  Signal("Signal4", 25, 31, 37),
-  Signal("Signal5", 26, 32, 38),
-  Signal("Signal6", 27, 33, 39)
+  Signal("Signal4", HALL_SENSOR_D_A3, SIGNAL_4_GREEN_PIN_36, SIGNAL_4_RED_PIN_37),
+  Signal("Signal5", HALL_SENSOR_E_A4, SIGNAL_5_GREEN_PIN_38, SIGNAL_5_RED_PIN_39),
+  Signal("Signal6", HALL_SENSOR_F_A5, SIGNAL_6_GREEN_PIN_40, SIGNAL_6_RED_PIN_41)
 };
 
 // Create Turnout objects for OuterLine
@@ -84,7 +164,7 @@ const int lineManagerCount = sizeof(lineManagers) / sizeof(lineManagers[0]);
 RailwayManager railwayManager(lineManagers, lineManagerCount);
 
 // Define lighting items
-const int lightingPins1[] = {40, 41, 42};
+const int lightingPins1[] = {LIGHTING_FACTORY_A_45, LIGHTING_HOUSE_A_46, LIGHTING_HOUSE_B_47, LIGHTING_ROAD_A_48};
 SceneryLighting lighting1("Lighting1", lightingPins1, sizeof(lightingPins1) / sizeof(lightingPins1[0]));
 
 SceneryLighting sceneries[] = {
@@ -103,11 +183,6 @@ void setup() {
   }
   delay(100);
   servo1.begin();
-  // servo2.begin();
-  // servo3.begin();
-  // servo4.begin();
-  // servo5.begin();
-  // servo6.begin();
   Serial.println(F("---------------\nSetup complete\n---------------"));
 }
 

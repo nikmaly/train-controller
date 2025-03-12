@@ -7,16 +7,21 @@
  */
 class HallSensor {
   private:
-    int sensorPin; ///< The pin number where the sensor is connected.
-    bool usePullup; ///< Whether to use the internal pull-up resistor.
+    int sensorPin;
+    bool usePullup;
+    String name;
 
   public:
     /**
      * @brief Constructor for HallSensor.
      * @param pin The pin number where the sensor is connected.
      * @param enablePullup Whether to enable the internal pull-up resistor (default: false).
+     * @param name The name of the Hall sensor.
      */
-    HallSensor(int pin, bool enablePullup = false) : sensorPin(pin), usePullup(enablePullup) {
+    HallSensor(int pin, String name, bool enablePullup = false) :
+      sensorPin(pin),
+      name(name),
+      usePullup(enablePullup) {
         pinMode(sensorPin, enablePullup ? INPUT_PULLUP : INPUT);
     }
 

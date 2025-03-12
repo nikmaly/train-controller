@@ -11,21 +11,25 @@
 class Signal {
   private:
     String name;
-    HallSensor hallSensor; ///< The hall sensor for the signal.
-    int greenLedPin; ///< The pin number for the green LED.
-    int redLedPin; ///< The pin number for the red LED.
-    bool isSafe; ///< The current state of the signal.
+    HallSensor hallSensor;
+    int greenLedPin;
+    int redLedPin;
+    bool isSafe;
 
   public:
     /**
      * @brief Constructor for Signal.
      * @param name The name of the signal.
-     * @param hallSensorPin The pin number for the hall sensor.
      * @param greenLedPin The pin number for the green LED.
      * @param redLedPin The pin number for the red LED.
+     * @param hallSensorPin The pin number for the hall sensor.
      */
-    Signal(const String& name, int hallSensorPin, int greenLedPin, int redLedPin)
-      : name(name), hallSensor(hallSensorPin), greenLedPin(greenLedPin), redLedPin(redLedPin), isSafe(true) {
+    Signal(const String& name, int hallSensorPin, int greenLedPin, int redLedPin) :
+      name(name),
+      hallSensor(hallSensorPin, name + ' sensor'),
+      greenLedPin(greenLedPin),
+      redLedPin(redLedPin),
+      isSafe(true) {
         pinMode(greenLedPin, OUTPUT);
         pinMode(redLedPin, OUTPUT);
         setState(true);

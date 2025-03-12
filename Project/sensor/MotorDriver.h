@@ -8,13 +8,13 @@
  */
 class MotorDriver {
  private:
-  int outPwm;               // PWM output pin
-  int outDirection1;        // First direction control pin
-  int outDirection2;        // Second direction control pin (if dual mode enabled)
-  bool dualDirection;       // Flag for dual direction mode
-  String motorName;         // Name of the motor
-  String currentDirection;  // Current motor direction
-  float currentSpeed;       // Current motor speed percentage
+  int outPwm;
+  int outDirection1;
+  int outDirection2;
+  bool dualDirection;
+  String motorName;
+  String currentDirection;
+  float currentSpeed;
 
   void logChange(String parameter, String value) {
     Serial.println(motorName + " changed " + parameter + " to " + value);

@@ -42,4 +42,4 @@ This project is an Arduino-based train controller system. It manages multiple co
   - Respect the `.clang-format` rules
   - Add documentation in the form of JSDoc
   - Do not include inline comment for self-evident functionality
-
+  - Prefer to use a basic digital pin. Use analog and PWM only when necessary.

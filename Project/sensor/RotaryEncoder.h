@@ -61,6 +61,7 @@ class RotaryEncoder {
   }
 };
 
+// Define the static instance pointer
 RotaryEncoder* RotaryEncoder::instance = nullptr;
 
 #endif  // ROTARYENCODER_H
