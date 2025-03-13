@@ -7,16 +7,17 @@ This project is an Arduino-based train controller system. It manages multiple co
 - **Project.ino**: Main file containing the setup and loop functions.
 - **src/SerialHandler.h**: Header file for serial communication utilities.
 - **src/CommandHandler.h**: Header file for command function utilities.
-- **src/MotorDriver.h**: Header file for motor driver utilities.
-- **src/RotaryEncoder.h**: Header file for rotary encoder utilities.
-- **src/HallSensor.h**: Header file for hall sensor utilities.
-- **src/Servo.h**: Header file for servo controller utilities.
-- **program/Signal.h**: Header file for individual signal management.
-- **program/LineManager.h**: Header file for managing a line, including blocks of Signals.
-- **program/RailwayManager.h**: Header file for managing a set of LineManagers.
-- **program/ScheneryLighting.h**: Header file for scenery lighting management.
-- **program/SpeedController.h**: Header file for speed controller utilities.
-- **program/Turnout.h**: Header file for turnout management.
+- **src/Signal.h**: Header file for individual signal management.
+- **src/LineManager.h**: Header file for managing a line, including blocks of Signals.
+- **src/RailwayManager.h**: Header file for managing a set of LineManagers.
+- **src/ScheneryLighting.h**: Header file for scenery lighting management.
+- **src/Turnout.h**: Header file for turnout management.
+- **lib/SpeedController.h**: Header file for speed controller utilities.
+- **lib/MotorDriver.h**: Header file for motor driver utilities.
+- **lib/RotaryEncoder.h**: Header file for rotary encoder utilities.
+- **lib/HallSensor.h**: Header file for hall sensor utilities.
+- **lib/Servo.h**: Header file for servo controller utilities.
+- **lib/Button.h**: Header file for button management.
 
 ## Language
 - **C++**: The project is written in C++ for the Arduino platform.
@@ -30,6 +31,7 @@ This project is an Arduino-based train controller system. It manages multiple co
 - **Response Preferences**:
   - NEVER modify existing pin values without specifically being asked to do so. 
   - If there is no available pin, or it is not of the appropriate type, warn me
+  - Do not use .cpp files - only .h
   - Responses should be succinct.
   - Responses should focus on the specific request.
   - As an addendum to responses, note any recommendations or improvements.

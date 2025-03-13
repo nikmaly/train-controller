@@ -5,18 +5,19 @@
 #include <Adafruit_ST7789.h>
 
 // Files
-#include "src/CommandHandler.h"
-#include "src/SerialHandler.h"
 #include "lib/RotaryEncoder.h"
 #include "lib/HallSensor.h"
 #include "lib/Servo.h"
+#include "lib/Button.h"
+#include "lib/Screen.h"
+#include "src/CommandHandler.h"
+#include "src/SerialHandler.h"
+#include "src/SceneryLighting.h"
 #include "src/Signal.h"
 #include "src/LineManager.h"
 #include "src/RailwayManager.h"
 #include "src/Turnout.h"
 #include "src/SpeedController.h"
-#include "src/SceneryLighting.h"
-#include "lib/Screen.h"
 
 // Analog Pins (A0-A15)
 #define HALL_SENSOR_A_A0          A0   // Analog: Hall effect sensor A
