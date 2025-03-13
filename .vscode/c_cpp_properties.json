@@ -19,6 +19,12 @@
                 "/Users/nik/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino",
                 "/Users/nik/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/variants/mega",
                 "/Users/nik/Documents/Arduino/libraries/Servo/src",
+                "/Users/nik/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src",
+                "/Users/nik/Documents/Arduino/libraries/Adafruit_FRAM_SPI",
+                "/Users/nik/Documents/Arduino/libraries/Adafruit_BusIO",
+                "/Users/nik/Documents/Arduino/libraries/Adafruit_ST7735_and_ST7789_Library",
+                "/Users/nik/Documents/Arduino/libraries/Adafruit_GFX_Library",
+                "/Users/nik/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
                 "/Users/nik/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/lib/gcc/avr/7.3.0/include",
                 "/Users/nik/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/lib/gcc/avr/7.3.0/include-fixed",
                 "/Users/nik/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include"

@@ -1,5 +1,9 @@
 // External Libraries
 #include <Servo.h>
+#include <SPI.h>
+#include <Adafruit_FRAM_SPI.h>
+#include <Adafruit_ST7789.h>
+
 // Files
 #include "src/CommandHandler.h"
 #include "src/SerialHandler.h"
@@ -12,6 +16,7 @@
 #include "src/Turnout.h"
 #include "src/SpeedController.h"
 #include "src/SceneryLighting.h"
+#include "lib/Screen.h"
 
 // Analog Pins (A0-A15)
 #define HALL_SENSOR_A_A0          A0   // Analog: Hall effect sensor A
@@ -40,14 +45,14 @@
 #define TRACK_A_PIN2              3    // Digital PWM: Track A Motor Driver Pin 2
 #define TRACK_B_PIN1              4    // Digital PWM: Track B Motor Driver Pin 1
 #define TRACK_B_PIN2              5    // Digital PWM: Track B Motor Driver Pin 2
-#define UNUSED_PWM_6              6    // Digital PWM: Unused pin
-#define UNUSED_PWM_7              7    // Digital PWM: Unused pin
-#define UNUSED_PWM_8              8    // Digital PWM: Unused pin
-#define SERVO_A_9                 9    // Digital PWM: Servo1 (Turnout1) control pin
-#define SERVO_B_10                10   // Digital PWM: Servo2 (Turnout2) control pin
-#define UNUSED_PWM_11             11   // Digital PWM: Unused pin
+#define SERVO_A_6                 6    // Digital PWM: Servo1 (Turnout1) control pin
+#define SERVO_B_7                 7    // Digital PWM: Servo2 (Turnout2) control pin
+#define TFT_DC_8                  8    // Digital PWM: 
+#define TFT_RST_9                 9    // Digital PWM: 
+#define TFT_CS_10                 10   // Digital PWM: 
+#define TFT_MOSI_11               11   // Digital PWM: 
 #define UNUSED_PWM_12             12   // Digital PWM: Unused pin
-#define UNUSED_PWM_13             13   // Digital PWM: Unused pin
+#define TFT_SCLK_13               13   // Digital PWM: 
 
 // Hardware Serial Communication Pins
 #define SERIAL3_TX_PIN            14  // Serial Output: TX3
@@ -97,13 +102,15 @@
 
 MotorDriver trackLineA(TRACK_A_PIN1, TRACK_A_PIN2, "Track A");
 MotorDriver trackLineB(TRACK_B_PIN1, TRACK_B_PIN2, "Track B");
-ServoController servo1(SERVO_A_9, "Servo1");
-ServoController servo2(SERVO_B_10, "Servo2");
+ServoController servo1(SERVO_A_6, "Servo1");
+ServoController servo2(SERVO_B_7, "Servo2");
 SerialHandler serialHandler;
 MotorDriver* activeTrackLine = &trackLineA;
 RotaryEncoder speedEncoder(SPEED_ENCODER_A_PIN_A_18, SPEED_ENCODER_A_PIN_B_19, SPEED_ENCODER_A_SWITCH_22);
 RotaryEncoder speedEncoderB(SPEED_ENCODER_B_PIN_A_20, SPEED_ENCODER_B_PIN_B_21, SPEED_ENCODER_B_SWITCH_23);
 SpeedController speedController(&speedEncoder, &trackLineA, &trackLineB);
+
+Screen screen(TFT_DC_8, TFT_RST_9, TFT_CS_10);
 
 Track tracks[] = {
   {"Track A", &trackLineA},
@@ -183,6 +190,8 @@ void setup() {
   }
   delay(100);
   servo1.begin();
+  screen.begin();
+  screen.testDisplay();
   Serial.println(F("---------------\nSetup complete\n---------------"));
 }
 
