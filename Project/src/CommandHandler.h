@@ -1,9 +1,9 @@
 #ifndef COMMAND_HANDLER_H
 #define COMMAND_HANDLER_H
 
-#include "../sensor/MotorDriver.h"
-#include "../sensor/RotaryEncoder.h"
-#include "../sensor/Servo.h"
+#include "../lib/MotorDriver.h"
+#include "../lib/RotaryEncoder.h"
+#include "../lib/Servo.h"
 #include "SerialHandler.h"
 
 // Define ServoMapping struct

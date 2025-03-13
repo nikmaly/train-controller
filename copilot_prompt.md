@@ -3,24 +3,20 @@
 ## Description
 This project is an Arduino-based train controller system. It manages multiple components such as motors, servos, rotary encoders, and hall sensors to control and monitor a model train setup.
 
-## Components
-- **MotorDriver**: Controls the speed and direction of the train tracks.
-- **ServoController**: Manages the position of servos.
-- **RotaryEncoder**: Reads the position and speed of the train.
-- **HallSensor**: Detects the presence of the train.
-- **SerialHandler**: Handles serial communication for receiving commands.
-
 ## Files
 - **Project.ino**: Main file containing the setup and loop functions.
-- **util/SerialHandler.h**: Header file for serial communication utilities.
-- **util/CommandHandler.h**: Header file for command function utilities.
-- **sensor/MotorDriver.h**: Header file for motor driver utilities.
-- **sensor/RotaryEncoder.h**: Header file for rotary encoder utilities.
-- **sensor/HallSensor.h**: Header file for hall sensor utilities.
-- **sensor/Servo.h**: Header file for servo controller utilities.
+- **src/SerialHandler.h**: Header file for serial communication utilities.
+- **src/CommandHandler.h**: Header file for command function utilities.
+- **src/MotorDriver.h**: Header file for motor driver utilities.
+- **src/RotaryEncoder.h**: Header file for rotary encoder utilities.
+- **src/HallSensor.h**: Header file for hall sensor utilities.
+- **src/Servo.h**: Header file for servo controller utilities.
 - **program/Signal.h**: Header file for individual signal management.
 - **program/LineManager.h**: Header file for managing a line, including blocks of Signals.
 - **program/RailwayManager.h**: Header file for managing a set of LineManagers.
+- **program/ScheneryLighting.h**: Header file for scenery lighting management.
+- **program/SpeedController.h**: Header file for speed controller utilities.
+- **program/Turnout.h**: Header file for turnout management.
 
 ## Language
 - **C++**: The project is written in C++ for the Arduino platform.
@@ -43,3 +39,4 @@ This project is an Arduino-based train controller system. It manages multiple co
   - Add documentation in the form of JSDoc
   - Do not include inline comment for self-evident functionality
   - Prefer to use a basic digital pin. Use analog and PWM only when necessary.
+  - Update the ##Files section in this file as needed

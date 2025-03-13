@@ -1,8 +1,8 @@
 #ifndef SPEEDCONTROLLER_H
 #define SPEEDCONTROLLER_H
 
-#include "../sensor/RotaryEncoder.h"
-#include "../sensor/MotorDriver.h"
+#include "../lib/RotaryEncoder.h"
+#include "../lib/MotorDriver.h"
 
 /**
  * @typedef {Object} EncoderCommand

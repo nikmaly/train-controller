@@ -1,7 +1,7 @@
 #ifndef SIGNAL_H
 #define SIGNAL_H
 
-#include "../sensor/HallSensor.h"
+#include "../lib/HallSensor.h"
 #include <Arduino.h>
 
 /**

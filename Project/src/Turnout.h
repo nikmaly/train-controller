@@ -1,7 +1,7 @@
 #ifndef TURNOUT_H
 #define TURNOUT_H
 
-#include "../sensor/Servo.h"
+#include "../src/Servo.h"
 
 class Turnout {
  private:

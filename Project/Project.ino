@@ -1,17 +1,17 @@
 // External Libraries
 #include <Servo.h>
 // Files
-#include "util/CommandHandler.h"
-#include "util/SerialHandler.h"
-#include "sensor/RotaryEncoder.h"
-#include "sensor/HallSensor.h"
-#include "sensor/Servo.h"
-#include "program/Signal.h"
-#include "program/LineManager.h"
-#include "program/RailwayManager.h"
-#include "program/Turnout.h"
-#include "program/SpeedController.h"
-#include "program/SceneryLighting.h"
+#include "src/CommandHandler.h"
+#include "src/SerialHandler.h"
+#include "lib/RotaryEncoder.h"
+#include "lib/HallSensor.h"
+#include "lib/Servo.h"
+#include "src/Signal.h"
+#include "src/LineManager.h"
+#include "src/RailwayManager.h"
+#include "src/Turnout.h"
+#include "src/SpeedController.h"
+#include "src/SceneryLighting.h"
 
 // Analog Pins (A0-A15)
 #define HALL_SENSOR_A_A0          A0   // Analog: Hall effect sensor A
