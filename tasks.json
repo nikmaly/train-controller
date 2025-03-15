@@ -1,0 +1,22 @@
+// filepath: /Users/nik/_dev/2-arduino/TrainController/.vscode/tasks.json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Lint with Clang-Format",
+      "type": "shell",
+      "command": "clang-format",
+      "args": [
+        "-i",
+        "${workspaceFolder}/**/*.cpp",
+        "${workspaceFolder}/**/*.h",
+        "${workspaceFolder}/**/*.ino"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

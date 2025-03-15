@@ -1,3 +1,9 @@
+
+#include <Adafruit_GFX.h>
+#include <Adafruit_SPITFT_Macros.h>
+#include <Adafruit_SPITFT.h>
+#include <gfxfont.h>
+
 // External Libraries
 #include <Servo.h>
 #include <SPI.h>
@@ -110,8 +116,7 @@ MotorDriver* activeTrackLine = &trackLineA;
 RotaryEncoder speedEncoder(SPEED_ENCODER_A_PIN_A_18, SPEED_ENCODER_A_PIN_B_19, SPEED_ENCODER_A_SWITCH_22);
 RotaryEncoder speedEncoderB(SPEED_ENCODER_B_PIN_A_20, SPEED_ENCODER_B_PIN_B_21, SPEED_ENCODER_B_SWITCH_23);
 SpeedController speedController(&speedEncoder, &trackLineA, &trackLineB);
-
-Screen screen(TFT_DC_8, TFT_RST_9, TFT_CS_10);
+Screen screen(TFT_CS_10, TFT_DC_8, TFT_RST_9);
 
 Track tracks[] = {
   {"Track A", &trackLineA},
@@ -190,9 +195,8 @@ void setup() {
     ;
   }
   delay(100);
-  servo1.begin();
   screen.begin();
-  screen.testDisplay();
+  // screen.testDisplay();
   Serial.println(F("---------------\nSetup complete\n---------------"));
 }
 
@@ -201,28 +205,28 @@ void setup() {
  */
 void loop() {
   // Update the railway manager
-  railwayManager.update();
+  // railwayManager.update();
 
-  // Read the serial input
-  SerialCommand serialCommand = serialHandler.readCommand();
-  if (serialCommand.isValid()) {
-    Serial.println("Received serial command: " + serialCommand.target + " " + serialCommand.action + " " + serialCommand.value);
-    commandHandler.handleCommand(serialCommand.target, serialCommand.action, serialCommand.value);
-  }
+  // // Read the serial input
+  // SerialCommand serialCommand = serialHandler.readCommand();
+  // if (serialCommand.isValid()) {
+  //   Serial.println("Received serial command: " + serialCommand.target + " " + serialCommand.action + " " + serialCommand.value);
+  //   commandHandler.handleCommand(serialCommand.target, serialCommand.action, serialCommand.value);
+  // }
 
-  // Read the speed controller
-  EncoderCommand encoderCommand = speedController.update();
-  if (encoderCommand.isValid()) {
-    Serial.println("Received encoder command: " + encoderCommand.target + " " + encoderCommand.action + " " + encoderCommand.value);
-    commandHandler.handleCommand(encoderCommand.target, encoderCommand.action, encoderCommand.value);
-  }
+  // // Read the speed controller
+  // EncoderCommand encoderCommand = speedController.update();
+  // if (encoderCommand.isValid()) {
+  //   Serial.println("Received encoder command: " + encoderCommand.target + " " + encoderCommand.action + " " + encoderCommand.value);
+  //   commandHandler.handleCommand(encoderCommand.target, encoderCommand.action, encoderCommand.value);
+  // }
 
-  // Handle track swap request
-  if (encoderCommand.trackSwapRequested) {
-    speedController.swapTrack();
-    activeTrackLine = speedController.getActiveTrackLine();
-    Serial.println("Track swap requested. Active track line switched.");
-  }
+  // // Handle track swap request
+  // if (encoderCommand.trackSwapRequested) {
+  //   speedController.swapTrack();
+  //   activeTrackLine = speedController.getActiveTrackLine();
+  //   Serial.println("Track swap requested. Active track line switched.");
+  // }
 
   delay(1);
 }
